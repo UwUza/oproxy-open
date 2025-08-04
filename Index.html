@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>oproxy-open</title>
+  <style>
+    body { font-family: sans-serif; text-align: center; }
+    #proxy-frame { width: 90vw; height: 80vh; border: 1px solid #ccc; margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <h1>oproxy-open</h1>
+  <form id="proxy-form">
+    <input type="url" id="url-input" placeholder="Enter website URL (https://...)" required style="width: 300px;">
+    <button type="submit">Go</button>
+  </form>
+  <iframe id="proxy-frame" style="display:none;"></iframe>
+  <script>
+    const form = document.getElementById('proxy-form');
+    const input = document.getElementById('url-input');
+    const frame = document.getElementById('proxy-frame');
+    form.onsubmit = e => {
+      e.preventDefault();
+      const url = input.value;
+      frame.src = `/proxy?url=${encodeURIComponent(url)}`;
+      frame.style.display = 'block';
+    };
+  </script>
+</body>
+</html>
